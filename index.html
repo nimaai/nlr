@@ -6,10 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <script type="text/javascript" src="nlr.js"></script>
 <script type="text/javascript" src="nlr_data.js"></script>
-<script> lilaIndex = getLilaIndex(); </script>
 </head>
 
 <body>
+
+<div id="current-time">
+  <script> document.write(formatTime(currentHs, currentMs)); </script>
+</div>
+
+<br>
 
 <div id="sanskrit-name">
   <script> document.write(sanskritNames[lilaIndex]); </script> Lila
@@ -24,6 +29,7 @@
 <br>
 
 <div id="time-interval">
+  <script> document.write(formatTimeInterval(lilaIndex)); </script>
 </div>
 
 <br>
