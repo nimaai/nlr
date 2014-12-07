@@ -1,4 +1,4 @@
-var sanskritNames = ["Nisha", "Nishanta", "Prataha", "Purvahna", "Madhyahna", "Aparahna", "Shayana", "Pradosha"]
+var sanskritNames = ["Nisha", "Nishanta", "Prataha", "Purvahna", "Madhyahna", "Aparahna", "Shayana", "Pradosha"];
 
 var englishNames = [
   "Night Pastimes",
@@ -9,7 +9,7 @@ var englishNames = [
   "Afternoon Pastimes",
   "Dusk Pastimes",
   "Evening Pastimes"
-]
+];
 
 var shortDescriptions = [
   "At night, Lord Gauranga returns home to take rest. May this Lord Gauranga protect us all.",
@@ -20,7 +20,7 @@ var shortDescriptions = [
   "In the afternoon, Lord Gauranga wanders about the town of Navadvipa, sporting with all the residents.",
   "At dusk, Lord Gauranga returns home to worship Lord Vishnu and be with His family.",
   "In the evening , Lord Gauranga goes with His associates to the courtyard of Shrivasa Pandita to chant the holy names and dance in ecstasy."
-]
+];
 
 var rupaDescriptions = [
   "My most worshipable golden Lord Gauranga is joyfully surrounded by His most loving devotees in Shrivasa Pandita's courtyard at night. There He immerses Himself in the transcendental ocean of congregationally chanting His own holy names (internally absorbed in the divine rasa-dance of Shri Shri Radha and Krishna). He also dances wildly in a state of tearful shivering and over-whelming jubilation. After singing and dancing to His heart's content, He goes to a quiet flower-garden and enjoys a feast of forest fruits, served to Him as He reclines upon a jeweled bedstead. Thus, the Son of Shachi Devi is most deserving of my whole-hearted selfless worship.",
@@ -31,7 +31,7 @@ var rupaDescriptions = [
   "Lord Gauranga remembers the son of the King of Vraja, who returns from the pasture grounds in the noon, an event which produces an unlimited ocean of bliss for all the residents of Vraja. Remembering within the core of His heart, Lord Gauranga dances throughout the town of Navadvipa, spinning around while exhaling deeply ecstatic sighs. Thus becoming completely enchanted, He enchantes the townspeople so much that they all become helplessly stunned in divine love. Oh my dear mind, just worship this Shri Gauranga!",
   "Then Krishna takes His evening bath, has His dinner and performs many other fascinating pastimes around sunset time, then Lord Gauranga absorbs Himself in thinking of these pastimes again and again with great relish. In the circle of His own dearmost devotees, He constantly follows along those same wonderful pastimes. Dear mind! Just worship this moon-like Lord Gauranga-candra!",
   "In the evening, Shrimati Radharani travels to the pre-assigned pleasure-grove in the company of Her gopi-friends and waits impatiently for Krishna to arrive for Their secret rendezvous. When She receives news from a messenger about the activities and whereabouts of Her Beloved Lord Krishna, Her heart is completely overwhelmed with the most instense anxiety. Oh my! In exactly that same mood, Lord Gauranga travels to the courtyard of Shrivasa Pandita in the evening, walking hand on hip as Radha does. Afterwards, when He realizes that Shri Krishna has indeed arrived before Shri Radha, Lord Gauranga jubilantly dances and stumbles repeatedly, His body erupting in intense euphoria with torrents of tears and shivering limbs. Just worship the fair-complexioned Lord Gauranga!"
-]
+];
 
 var vishvanathDescriptions = [
   "Continuing well into the night, Lord Gauranga dances and dances with Prabhu Nityananda in the courtyard of Shrivasa, surrounded by His most intimate devotees. His ecstatic singing is accompanied by the devotees who are expert in playing very loud rhytms on the mridanga drums. He wanders and dances with Shri Gadadhara Prabhu in the most astonishing way troughout the night, until just before dawn. Then He returns to His own home, where He retires to His bedchamber and falls asleep. I thus meditate on the daily pastimes of Shri Gauranga-nataraja.",
@@ -42,4 +42,4 @@ var vishvanathDescriptions = [
   "During the splendidly beautiful afternoon period, Lord Gauranga and His devotees all become equally maddened in ecstatic love, and thus they expand ever-increasing waves of auspicious benefit that ripple all through-out the three worlds. In this mood, they leave the gardens and travel back toward His home. Along the way, He satisfies the eyes of all the townspeople, just as the moon satisfies the chakora bird with its moonbeams. Reaching home, Lord Gauranga is met at the door by His mother and lavished with loving attentions. I meditate on the daily pastimes of Shri Gauranga.",
   "At dusk, the Lord bathes with His dear friends in the Ganga, the river who flows in the three parts. They devoutly worship the Ganga by offering ghee lamps, flowers, and other articles. Afterwards, the Lord puts on fresh silken clothes and is adorned with flower garlands. Then, He worships Lord Vishnu at home by performing the evening arati ceremony, offering ghee lamps and other items. Later, He and His friends partake of the foodstuffs and betel nuts that were offered to Lord Vishnu. I thus meditate on the daily pastimes of Shri Gauranga.",
   "In the evening time, Lord Gauranga goes to the home of Shrivasa Pandita, accompanied by Shrila Advaitachandra and other dear associates. Meeting with the multitude of His devotees, He tastes and relishes the nectar of topics about Lord Hari, and His mind becomes most agitated with the ecstasies of pure love of Godhead. Then, becoming very lustful to relish the congregational chanting of the holy names of the Lord, Lord Gauranga orchestrates the performance of intensely jubilant sankirtana, which attains the summit of passionate glorification ,of these holy names. I thus meditate on the daily pastimes of Lord Gauranga-sundara."
-]
+];
