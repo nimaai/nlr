@@ -1,4 +1,4 @@
-var sanskritNames = ["nisha", "nishanta", "prataha", "purvahna", "madhyahna", "aparahna", "shayana", "pradosha"]
+var sanskritNames = ["Nisha", "Nishanta", "Prataha", "Purvahna", "Madhyahna", "Aparahna", "Shayana", "Pradosha"]
 
 var englishNames = [
   "Night Pastimes",

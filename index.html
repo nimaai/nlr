@@ -1,18 +1,51 @@
 <!DOCTYPE html>
+
 <html>
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-    <script type="text/javascript" src="nlr.js"></script>
-    <script type="text/javascript" src="nlr_data.js"></script>
-  </head>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<script type="text/javascript" src="nlr.js"></script>
+<script type="text/javascript" src="nlr_data.js"></script>
+<script> lilaIndex = getLilaIndex(); </script>
+</head>
 
-  <body>
+<body>
 
-    <script>
-document.write( sanskritNames[getLilaIndex()]);
-    </script>
+<div id="sanskrit-name">
+  <script> document.write(sanskritNames[lilaIndex]); </script> Lila
+</div>
 
-  </body>
+<br>
+
+<div id="english-name">
+  <script> document.write(englishNames[lilaIndex]); </script>
+</div>
+
+<br>
+
+<div id="time-interval">
+</div>
+
+<br>
+
+<div id="short-description">
+  <script> document.write(shortDescriptions[lilaIndex]); </script>
+</div>
+
+<br>
+
+<div id="rupa">
+  <script> document.write(rupaDescriptions[lilaIndex]); </script>
+</div>
+
+<br>
+
+<div id="vishvanath">
+  <script> document.write(rupaDescriptions[lilaIndex]); </script>
+</div>
+
+<br>
+
+</body>
 
 </html>
