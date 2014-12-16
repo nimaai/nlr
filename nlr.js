@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var timeIntervals = [
   [[22, 48], [3, 36]],
@@ -16,8 +16,8 @@ var getDayTimeInMinutes = function (hs, ms) {
 };
 
 var formatTime = function (h, m) {
-  m = m < 10 ? "0" + m : m;
-  return [h, ":", m].join("");
+  m = m < 10 ? '0' + m : m;
+  return [h, ':', m].join('');
 };
 
 var formatTimeInterval = function (index) {
@@ -27,7 +27,7 @@ var formatTimeInterval = function (index) {
     , eh = interval[1][0]
     , em = interval[1][1];
 
-  return [formatTime(bh, bm), " - ", formatTime(eh, em)].join("");
+  return [formatTime(bh, bm), ' - ', formatTime(eh, em)].join('');
 };
 
 var currentDate = new Date()
