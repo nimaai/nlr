@@ -1,10 +1,10 @@
 'use strict';
 
 function testLilaIndex(h, m) {
-  currentHs = h;
-  currentMs = m;
+  time.currentHs = h;
+  time.currentMs = m;
 
-  return getLilaIndex();
+  return app.getLilaIndex();
 }
 
 QUnit.test('lila index test', function(assert) {
