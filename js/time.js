@@ -20,7 +20,11 @@ var time = {};
       , eh = interval[1][0]
       , em = interval[1][1];
 
-    return [time.formatTime(bh, bm), ' - ', time.formatTime(eh, em)].join('');
+    return [
+      time.formatTime(bh, bm),
+      ' - ',
+      time.formatTime(eh, em)
+    ].join('');
   };
 
 })();

@@ -8,10 +8,10 @@ var data, index
     return hs * 60 + ms;
   };
 
-  var getLilaIndex = function () {
-    var index
-      , i
-      , timeNowInMinutes = getDayTimeInMinutes(time.currentHs, time.currentMs);
+  app.getLilaIndex = function () {
+    var index, i;
+    var timeNowInMinutes =
+      getDayTimeInMinutes(time.currentHs, time.currentMs);
 
     index = 0;
     for (i = index; i < data.timeIntervals.length; i = i + 1) {
@@ -29,6 +29,6 @@ var data, index
     return index;
   };
 
-  app.index = getLilaIndex();
+  app.index = app.getLilaIndex();
 
 })();
