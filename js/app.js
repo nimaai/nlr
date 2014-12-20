@@ -1,5 +1,7 @@
 'use strict';
 
+var data;
+
 var getDayTimeInMinutes = function (hs, ms) {
   return hs * 60 + ms;
 };
@@ -10,7 +12,7 @@ var formatTime = function (h, m) {
 };
 
 var formatTimeInterval = function (index) {
-  var interval = timeIntervals[index]
+  var interval = data.timeIntervals[index]
     , bh = interval[0][0]
     , bm = interval[0][1]
     , eh = interval[1][0]
@@ -29,11 +31,11 @@ var getLilaIndex = function () {
     , timeNowInMinutes = getDayTimeInMinutes(currentHs, currentMs);
 
   index = 0;
-  for (i = index; i < timeIntervals.length; i = i + 1) {
-    var bh = timeIntervals[i][0][0]
-      , bm = timeIntervals[i][0][1]
-      , eh = timeIntervals[i][1][0]
-      , em = timeIntervals[i][1][1];
+  for (i = index; i < data.timeIntervals.length; i = i + 1) {
+    var bh = data.timeIntervals[i][0][0]
+      , bm = data.timeIntervals[i][0][1]
+      , eh = data.timeIntervals[i][1][0]
+      , em = data.timeIntervals[i][1][1];
 
     if (timeNowInMinutes < getDayTimeInMinutes(eh, em)) {
       index = i;

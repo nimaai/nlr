@@ -1,4 +1,6 @@
-var timeIntervals = [
+var data = {};
+
+data.timeIntervals = [
   [[22, 48], [3, 36]],
   [[3, 36], [6, 0]],
   [[6, 0], [8, 24]],
@@ -9,9 +11,9 @@ var timeIntervals = [
   [[20, 24], [22, 48]]
 ];
 
-var sanskritNames = ["Nisha", "Nishanta", "Prataha", "Purvahna", "Madhyahna", "Aparahna", "Shayana", "Pradosha"];
+data.sanskritNames = ["Nisha", "Nishanta", "Prataha", "Purvahna", "Madhyahna", "Aparahna", "Shayana", "Pradosha"];
 
-var englishNames = [
+data.englishNames = [
   "Night Pastimes",
   "Pastimes at the End of the Night till Sunrise",
   "Morning Pastimes",
@@ -22,7 +24,7 @@ var englishNames = [
   "Evening Pastimes"
 ];
 
-var shortDescriptions = [
+data.shortDescriptions = [
   "At night, Lord Gauranga returns home to take rest. May this Lord Gauranga protect us all.",
   "At the end of the night (before sunrise), Lord Gauranga gets up from His bed, washes His face and converses with His wife.",
   "In the morning , Lord Gauranga is massaged with oil and bathes in the celestial Ganga river, then worships Lord Vishnu.",
@@ -33,7 +35,7 @@ var shortDescriptions = [
   "In the evening , Lord Gauranga goes with His associates to the courtyard of Shrivasa Pandita to chant the holy names and dance in ecstasy."
 ];
 
-var rupaDescriptions = [
+data.rupaDescriptions = [
   "My most worshipable golden Lord Gauranga is joyfully surrounded by His most loving devotees in Shrivasa Pandita's courtyard at night. There He immerses Himself in the transcendental ocean of congregationally chanting His own holy names (internally absorbed in the divine rasa-dance of Shri Shri Radha and Krishna). He also dances wildly in a state of tearful shivering and over-whelming jubilation. After singing and dancing to His heart's content, He goes to a quiet flower-garden and enjoys a feast of forest fruits, served to Him as He reclines upon a jeweled bedstead. Thus, the Son of Shachi Devi is most deserving of my whole-hearted selfless worship.",
   "My dear mind! Just worship Lord Gauranga Mahaprabhu who, at the end of the night, suddenly awakens upon hearing the sweet warbling of the birds within the delightfully flowering forest grove of Shrivasa Pandit! At this time, His whole body is intensely thrilled due to His being aware of Lord Krishna being situated very close to Shrimati Radhrarani on Their flower-bed in a bower-house in Vrindavan. Because of this Lord Gauranga's ecstatic love is expressed instantly by wonderfully transcendental symptoms such a fountains of tears gushing from His eyes, which bathe His entire body. Just worship this Lord Gauranga, Whose bodily complexion can only be compared to shimmering pure molten gold.",
   "After sunrise, Lord Gauranga Mahaprabhu washes His moon-like face and comes out into the courtyard, where He sits and speaks lovingly from the heart with extreme eagerness and at great length to His most beloved devotees about Lord Kesava's morning pastimes at Nanda-gram. While speaking He tastes with great relish the ecstatic mood of Radharani, which causes His entire body to fully blossom in transcendental jubilation. Dear mind, just perform your worship with boundless, unending pure love for this golden Lord Gauranga.",
@@ -44,7 +46,7 @@ var rupaDescriptions = [
   "In the evening, Shrimati Radharani travels to the pre-assigned pleasure-grove in the company of Her gopi-friends and waits impatiently for Krishna to arrive for Their secret rendezvous. When She receives news from a messenger about the activities and whereabouts of Her Beloved Lord Krishna, Her heart is completely overwhelmed with the most instense anxiety. Oh my! In exactly that same mood, Lord Gauranga travels to the courtyard of Shrivasa Pandita in the evening, walking hand on hip as Radha does. Afterwards, when He realizes that Shri Krishna has indeed arrived before Shri Radha, Lord Gauranga jubilantly dances and stumbles repeatedly, His body erupting in intense euphoria with torrents of tears and shivering limbs. Just worship the fair-complexioned Lord Gauranga!"
 ];
 
-var vishvanathDescriptions = [
+data.vishvanathDescriptions = [
   "Continuing well into the night, Lord Gauranga dances and dances with Prabhu Nityananda in the courtyard of Shrivasa, surrounded by His most intimate devotees. His ecstatic singing is accompanied by the devotees who are expert in playing very loud rhytms on the mridanga drums. He wanders and dances with Shri Gadadhara Prabhu in the most astonishing way troughout the night, until just before dawn. Then He returns to His own home, where He retires to His bedchamber and falls asleep. I thus meditate on the daily pastimes of Shri Gauranga-nataraja.",
   "At the end of the night, upon hearing the pleasant sounds made by many birds such as cuckoos, roosters, and others, Lord Shri Gauranga arises from His bed. With His wife, Shri Vishnu-priya, He discusses many topics concerning the transcendental mellows of Their mutual loving affairs and thus They become very pleased. Then He gets up and goes to another room, wherein He sits upon a raised sitting place and is assisted by His devotees in washing His lotus face with nicely scented water. Thereafter, He very happily visits His mother, Shri Shachi Devi, as well as other friends and relatives in the home. I meditate thus on the daily pastimes of Shri Gauranga-sundara.",
   "In the morning, after sunrise, Lord Gauranga goes with His associates to bathe in the holy river. While bathing, they also worship Mother Ganga by offering flowers, incense and other presentations. They then come onto the bank of the river, where He is dressed with exquisite cloth and decorated with fresh flower garlands, sandalwood paste and other ornaments. Returning to His home in order to perform opulent worship of Lord Vishnu, as well as other rituals, they later partake of the foodstuffs that were offered to Lord Vishnu. After washing His hand and mouth, Lord Gauranga goes into another room and rests very happily for awhile. I meditate thus on the daily pastimes of Shri Gauranga-hari.",
