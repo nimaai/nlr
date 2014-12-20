@@ -1,49 +1,54 @@
 'use strict';
 
-var data;
+var data, index
+  , app = {};
 
-var getDayTimeInMinutes = function (hs, ms) {
-  return hs * 60 + ms;
-};
+(function() {
 
-var formatTime = function (h, m) {
-  m = m < 10 ? '0' + m : m;
-  return [h, ':', m].join('');
-};
+  var getDayTimeInMinutes = function (hs, ms) {
+    return hs * 60 + ms;
+  };
 
-var formatTimeInterval = function (index) {
-  var interval = data.timeIntervals[index]
-    , bh = interval[0][0]
-    , bm = interval[0][1]
-    , eh = interval[1][0]
-    , em = interval[1][1];
+  app.formatTime = function (h, m) {
+    m = m < 10 ? '0' + m : m;
+    return [h, ':', m].join('');
+  };
 
-  return [formatTime(bh, bm), ' - ', formatTime(eh, em)].join('');
-};
+  app.formatTimeInterval = function (index) {
+    var interval = data.timeIntervals[index]
+      , bh = interval[0][0]
+      , bm = interval[0][1]
+      , eh = interval[1][0]
+      , em = interval[1][1];
 
-var currentDate = new Date()
-  , currentHs = currentDate.getHours()
-  , currentMs = currentDate.getMinutes();
+    return [app.formatTime(bh, bm), ' - ', app.formatTime(eh, em)].join('');
+  };
 
-var getLilaIndex = function () {
-  var index
-    , i
-    , timeNowInMinutes = getDayTimeInMinutes(currentHs, currentMs);
+  var currentDate = new Date()
+    , currentHs = currentDate.getHours()
+    , currentMs = currentDate.getMinutes();
 
-  index = 0;
-  for (i = index; i < data.timeIntervals.length; i = i + 1) {
-    var bh = data.timeIntervals[i][0][0]
-      , bm = data.timeIntervals[i][0][1]
-      , eh = data.timeIntervals[i][1][0]
-      , em = data.timeIntervals[i][1][1];
+  var getLilaIndex = function () {
+    var index
+      , i
+      , timeNowInMinutes = getDayTimeInMinutes(currentHs, currentMs);
 
-    if (timeNowInMinutes < getDayTimeInMinutes(eh, em)) {
-      index = i;
-      break;
+    index = 0;
+    for (i = index; i < data.timeIntervals.length; i = i + 1) {
+      var bh = data.timeIntervals[i][0][0]
+        , bm = data.timeIntervals[i][0][1]
+        , eh = data.timeIntervals[i][1][0]
+        , em = data.timeIntervals[i][1][1];
+
+      if (timeNowInMinutes < getDayTimeInMinutes(eh, em)) {
+        index = i;
+        break;
+      }
     }
-  }
 
-  return index;
-};
+    return index;
+  };
 
-var lilaIndex = getLilaIndex();
+  index = getLilaIndex();
+
+})();
