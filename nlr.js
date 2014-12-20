@@ -46,17 +46,9 @@ var getLilaIndex = function () {
       , eh = timeIntervals[i][1][0]
       , em = timeIntervals[i][1][1];
 
-    // for 0:00 to 3:36 interval consider ending time of lila
-    if (i === 0) {
-      if (timeNowInMinutes < getDayTimeInMinutes(eh, em)) {
-        break;
-      }
-    // for the rest consider beginning time of lila
-    } else {
-      if (timeNowInMinutes < getDayTimeInMinutes(bh, bm)) {
-        index = i - 1;
-        break;
-      }
+    if (timeNowInMinutes < getDayTimeInMinutes(eh, em)) {
+      index = i;
+      break;
     }
   }
 

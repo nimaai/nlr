@@ -38,7 +38,7 @@ QUnit.test('lila index test', function(assert) {
 
   assert.ok(testLilaIndex(22, 47) === 7, 'Passed');
   assert.ok(testLilaIndex(22, 48) === 0, 'Passed');
-  assert.ok(testLilaIndex(20, 49) === 0, 'Passed');
+  assert.ok(testLilaIndex(22, 49) === 0, 'Passed');
 
   assert.ok(testLilaIndex(23, 59) === 0, 'Passed');
   assert.ok(testLilaIndex(0, 0) === 0, 'Passed');
