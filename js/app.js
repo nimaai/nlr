@@ -1,37 +1,17 @@
-'use strict';
-
 var data, index
   , app = {};
 
 (function() {
+  'use strict';
 
   var getDayTimeInMinutes = function (hs, ms) {
     return hs * 60 + ms;
   };
 
-  app.formatTime = function (h, m) {
-    m = m < 10 ? '0' + m : m;
-    return [h, ':', m].join('');
-  };
-
-  app.formatTimeInterval = function (index) {
-    var interval = data.timeIntervals[index]
-      , bh = interval[0][0]
-      , bm = interval[0][1]
-      , eh = interval[1][0]
-      , em = interval[1][1];
-
-    return [app.formatTime(bh, bm), ' - ', app.formatTime(eh, em)].join('');
-  };
-
-  var currentDate = new Date()
-    , currentHs = currentDate.getHours()
-    , currentMs = currentDate.getMinutes();
-
   var getLilaIndex = function () {
     var index
       , i
-      , timeNowInMinutes = getDayTimeInMinutes(currentHs, currentMs);
+      , timeNowInMinutes = getDayTimeInMinutes(time.currentHs, time.currentMs);
 
     index = 0;
     for (i = index; i < data.timeIntervals.length; i = i + 1) {
@@ -49,6 +29,6 @@ var data, index
     return index;
   };
 
-  index = getLilaIndex();
+  app.index = getLilaIndex();
 
 })();
