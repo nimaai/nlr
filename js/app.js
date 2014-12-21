@@ -1,4 +1,4 @@
-var data, index
+var data
   , app = {};
 
 (function() {
