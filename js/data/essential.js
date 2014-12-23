@@ -60,4 +60,6 @@ var data = {};
     "In the evening time, Lord Gauranga goes to the home of Shrivasa Pandita, accompanied by Shrila Advaitachandra and other dear associates. Meeting with the multitude of His devotees, He tastes and relishes the nectar of topics about Lord Hari, and His mind becomes most agitated with the ecstasies of pure love of Godhead. Then, becoming very lustful to relish the congregational chanting of the holy names of the Lord, Lord Gauranga orchestrates the performance of intensely jubilant sankirtana, which attains the summit of passionate glorification ,of these holy names. I thus meditate on the daily pastimes of Lord Gauranga-sundara."
   ];
 
+  data.longDescriptions = [];
+
 })();

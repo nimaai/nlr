@@ -1,7 +1,5 @@
 var data;
 
-data.longDescriptions = [];
-
 data.longDescriptions[0] = [
   "At night Lord Gauranga happily performs sankirtana along with His closest associates. Later He goes to the home of His beloved wife. Thus narrates Krishna Dasa.",
   "Lord Gauranga Begins the Sankirtan",
