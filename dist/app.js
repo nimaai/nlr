@@ -5,11 +5,24 @@
 var nlr = require('nlr');
 
 global.window.addEventListener('load', function() {
-  global.document.getElementById('sanskrit-name').innerHTML = nlr.getSanskritName(0);
+  var currentDate = new Date();
+  var currentHour = currentDate.getHours();
+  var currentMinute = currentDate.getMinutes();
+
+  var index = nlr.getLilaIndex(currentDate);
+
+  global.document.getElementById('current-time').innerHTML = nlr.time.formatTime(currentHour, currentMinute);
+  global.document.getElementById('sanskrit-name').innerHTML = nlr.getSanskritName(index) + ' Lila';
+  global.document.getElementById('english-name').innerHTML = nlr.getEnglishName(index);
+  global.document.getElementById('time-interval').innerHTML = nlr.time.formatTimeInterval(nlr.getTimeInterval(index));
+  global.document.getElementById('short-description').innerHTML = nlr.getShortDescription(index);
+  global.document.getElementById('rupa-description').innerHTML = nlr.getRupaDescription(index);
+  global.document.getElementById('vishvanath-description').innerHTML = nlr.getVishvanathDescription(index);
+  global.document.getElementById('long-description').innerHTML = nlr.getLongDescription(index).join('<br><br>');
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"nlr":16}],2:[function(require,module,exports){
+},{"nlr":18}],2:[function(require,module,exports){
 module.exports=[
   "Night Pastimes",
   "Pastimes at the End of the Night till Sunrise",
@@ -257,6 +270,60 @@ module.exports=[
 },{}],16:[function(require,module,exports){
 'use strict';
 
+var timeIntervals = require('../data/time-intervals');
+
+var getDayTimeInMinutes = function(hs, ms) {
+  return hs * 60 + ms;
+};
+
+exports.getLilaIndex = function(d) {
+  var index, i;
+  var timeNowInMinutes =
+    getDayTimeInMinutes(d.getHours(),
+                        d.getMinutes());
+
+  index = 0;
+  for (i = index; i < 8; i = i + 1) {
+    var bh = timeIntervals[i][0][0]
+      , bm = timeIntervals[i][0][1]
+      , eh = timeIntervals[i][1][0]
+      , em = timeIntervals[i][1][1];
+
+    if (timeNowInMinutes < getDayTimeInMinutes(eh, em)) {
+      index = i;
+      break;
+    }
+  }
+
+  return index;
+};
+
+},{"../data/time-intervals":14}],17:[function(require,module,exports){
+'use strict';
+
+var formatTime = function (h, m) {
+  m = m < 10 ? '0' + m : m;
+  return [h, ':', m].join('');
+};
+
+exports.formatTimeInterval = function (interval) {
+  var bh = interval[0][0]
+    , bm = interval[0][1]
+    , eh = interval[1][0]
+    , em = interval[1][1];
+
+  return [
+    formatTime(bh, bm),
+    ' - ',
+    formatTime(eh, em)
+  ].join('');
+};
+
+exports.formatTime = formatTime;
+
+},{}],18:[function(require,module,exports){
+'use strict';
+
 var timeIntervals = require('./data/time-intervals');
 var sanskritNames = require('./data/sanskrit-names');
 var englishNames = require('./data/english-names');
@@ -277,6 +344,8 @@ longDescriptions[7] = require('./data/long/pradosha');
 // ***************************************************
 
 module.exports = {
+
+  getLilaIndex: require('./lib/index').getLilaIndex,
 
   getTimeInterval: function(i) {
     return timeIntervals[i];
@@ -304,7 +373,10 @@ module.exports = {
 
   getLongDescription: function(i) {
     return longDescriptions[i];
-  }
+  },
+
+  time: require('./lib/time.js')
+
 }
 
-},{"./data/english-names":2,"./data/long/aparahna":3,"./data/long/madhyahna":4,"./data/long/nisha":5,"./data/long/nishanta":6,"./data/long/pradosha":7,"./data/long/prataha":8,"./data/long/purvahna":9,"./data/long/shayana":10,"./data/rupa-descriptions":11,"./data/sanskrit-names":12,"./data/short-descriptions":13,"./data/time-intervals":14,"./data/vishvanath-descriptions":15}]},{},[1]);
+},{"./data/english-names":2,"./data/long/aparahna":3,"./data/long/madhyahna":4,"./data/long/nisha":5,"./data/long/nishanta":6,"./data/long/pradosha":7,"./data/long/prataha":8,"./data/long/purvahna":9,"./data/long/shayana":10,"./data/rupa-descriptions":11,"./data/sanskrit-names":12,"./data/short-descriptions":13,"./data/time-intervals":14,"./data/vishvanath-descriptions":15,"./lib/index":16,"./lib/time.js":17}]},{},[1]);
