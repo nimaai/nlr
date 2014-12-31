@@ -11,8 +11,10 @@ var testDataInterface = function(fn) {
   return fn(i);
 };
 
-exports.testDataInterface = function(test) {
-  test.expect(14);
+exports.testMainInterface = function(test) {
+  test.expect(17);
+
+  test.ok(0 <= main.getLilaIndex(new Date()) <= 7);
 
   test.ok(testDataInterface(main.getTimeInterval) != null);
   test.ok(testDataInterface(main.getTimeInterval).length > 0);
@@ -34,6 +36,9 @@ exports.testDataInterface = function(test) {
 
   test.ok(testDataInterface(main.getLongDescription) != null);
   test.ok(testDataInterface(main.getLongDescription).length > 0);
+
+  test.ok(typeof main.time.formatTime == 'function');
+  test.ok(typeof main.time.formatTimeInterval == 'function');
 
   test.done();
 };
