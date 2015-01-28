@@ -1,9 +1,9 @@
 {
-  "name": "nlr",
+  "name": "nlr-web",
   "version": "1.0.0",
   "description": "nitya lila reminder (nlr) ======================",
 
-  "main": "js/bundle.js",
+  "main": "js/app.js",
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,17 +11,22 @@
 
   "repository": {
     "type": "git",
-    "url": "https://github.com/nimaai/nlr.git"
+    "url": "https://github.com/nimaai/nlr-web.git"
   },
 
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nimaai/nlr/issues"
+    "url": "https://github.com/nimaai/nlr-web/issues"
   },
-  "homepage": "https://github.com/nimaai/nlr",
+  "homepage": "https://github.com/nimaai/nlr-web",
 
   "dependencies": {
-    "nlr-js": "nimaai/nlr-js"
+    "nlr-js": "nimaai/nlr-js-core"
+  },
+
+  "devDependencies": {
+    "funcunit": "bitovi/funcunit"
   }
+
 }

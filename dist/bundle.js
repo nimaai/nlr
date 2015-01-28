@@ -2,27 +2,60 @@
 (function (global){
 'use strict';
 
-var nlr = require('nlr');
+var update = require('./update').update;
 
 global.window.addEventListener('load', function() {
-  var currentDate = new Date();
-  var currentHour = currentDate.getHours();
-  var currentMinute = currentDate.getMinutes();
-
-  var index = nlr.getLilaIndex(currentDate);
-
-  global.document.getElementById('current-time').innerHTML = nlr.time.formatTime(currentHour, currentMinute);
-  global.document.getElementById('sanskrit-name').innerHTML = nlr.getSanskritName(index) + ' Lila';
-  global.document.getElementById('english-name').innerHTML = nlr.getEnglishName(index);
-  global.document.getElementById('time-interval').innerHTML = nlr.time.formatTimeInterval(nlr.getTimeInterval(index));
-  global.document.getElementById('short-description').innerHTML = nlr.getShortDescription(index);
-  global.document.getElementById('rupa-description').innerHTML = nlr.getRupaDescription(index);
-  global.document.getElementById('vishvanath-description').innerHTML = nlr.getVishvanathDescription(index);
-  global.document.getElementById('long-description').innerHTML = nlr.getLongDescription(index).join('<br><br>');
+  update();
+  setInterval(update, 1000);
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"nlr":18}],2:[function(require,module,exports){
+},{"./update":2}],2:[function(require,module,exports){
+(function (global){
+'use strict';
+
+var nlr = require('nlr');
+var index = null;
+
+var updateCurrentTime = function(currentHour, currentMinute) {
+  global.document.getElementById('current-time').innerHTML =
+    nlr.time.formatTime(currentHour, currentMinute);
+};
+
+var updateLilaInformation = function(index) {
+  global.document.getElementById('sanskrit-name').innerHTML =
+    nlr.getSanskritName(index) + ' Lila';
+  global.document.getElementById('english-name').innerHTML =
+    nlr.getEnglishName(index);
+  global.document.getElementById('time-interval').innerHTML =
+    nlr.time.formatTimeInterval(nlr.getTimeInterval(index));
+
+  global.document.getElementById('short-description').innerHTML =
+    nlr.getShortDescription(index);
+  global.document.getElementById('rupa-description').innerHTML =
+    nlr.getRupaDescription(index);
+  global.document.getElementById('vishvanath-description').innerHTML =
+    nlr.getVishvanathDescription(index);
+  global.document.getElementById('long-description').innerHTML =
+    nlr.getLongDescription(index).join('<br><br>');
+};
+
+exports.update = function() {
+  var currentDate = new Date()
+    , currentHour = currentDate.getHours()
+    , currentMinute = currentDate.getMinutes()
+    , i = nlr.getLilaIndex(currentDate);
+
+  updateCurrentTime(currentHour, currentMinute);
+
+  if (i != index) {
+    index = i;
+    updateLilaInformation(i);
+  }
+};
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"nlr":19}],3:[function(require,module,exports){
 module.exports=[
   "Night Pastimes",
   "Pastimes at the End of the Night till Sunrise",
@@ -34,7 +67,7 @@ module.exports=[
   "Evening Pastimes"
 ]
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports=[
   "In the afternoon Lord Gauranga meets with His beloved friends and dresses in garments that enchant all the worlds . Wandering throughout the town of Nadiya to each and every house He displays wondrous glory that has no end",
   "The Lord Tours the Town Navadvip",
@@ -62,7 +95,7 @@ module.exports=[
   "Thus Ends the Aparahna-Lila"
 ]
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports=[
   "In the midday period He goes to an extremely enchanting flower garden and becomes absorbed in riding the sportive waves of limitless pastime after pastime along with His intimate associates.",
   "Description of the Flower Garden",
@@ -78,7 +111,7 @@ module.exports=[
   "Thus Ends the Madhyahna-Lila"
 ]
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports=[
   "At night Lord Gauranga happily performs sankirtana along with His closest associates. Later He goes to the home of His beloved wife. Thus narrates Krishna Dasa.",
   "Lord Gauranga Begins the Sankirtan",
@@ -113,7 +146,7 @@ module.exports=[
   "Thus Ends the Nisha-Lila."
 ]
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports=[
   "At the end of the night Lord Gauranga lies upon a nice bed under the spell of sleep. There is no person alive who could behold such splendor and retain his life-breath.",
   "At the end of the night Gauranga-chanda is in His sleeping chamber. His limbs twinkle as cupid churns His mind. The golden bedstead is inlaid with solid coral and is decorated with pillows covered with pure white cloth. The nicely-colored silk is secured by cords in four corners and the jeweled tassels emit pinkish rays in all directions. Tall,strong golden posts grace the four corners supporting the expansive canopy hanging overhead.",
@@ -144,7 +177,7 @@ module.exports=[
   "Thus Ends the Nishanta-Lila."
 ]
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports=[
   "In the evening Lord Gauranga goes to Shrivasa's house while His heart blossoms in great delight . There He performs amazing pastimes according to the wishes of His dear friends.",
   "The Evening Arati of Shri Gauranga",
@@ -160,7 +193,7 @@ module.exports=[
   "Thus Ends the Pradosha-Lila"
 ]
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports=[
   "Waking up in the morning Lord Gauranga sits in the courtyard surrounded by His intimate associates. Effortlessly enchanting the minds of all beings in the universe He penetrates into their hearts and remains there always. After brushing His teeth and so forth He bathes in the celestial river Ganga overcome with ecstatic bliss . Then back at His home, He takes breakfast with His associates sporting novel prankish fun and afterwards rests.",
   "The Cooking Begins",
@@ -181,7 +214,7 @@ module.exports=[
   "Thus Ends the Pratah-Lila."
 ]
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports=[
   "In the forenoon period He visits the homes of devotees like Shuklambara and others and become totally overwhelmed immersed in ecstatic love as He sports various pastimes.",
   "Waking Up From the Nap",
@@ -195,7 +228,7 @@ module.exports=[
   "'Lord Gauranga perpetually goes to everyone's house and reveals to them the visions of Chatur-bhuja (four-armed form), Sad-bhuja (six-armed form) and so forth. At one moment He goes to Gangadasa Murari's home and at the next moment He goes to Acharya-Ratna's home. Then, Prabhu takes His devotees and sits in a heavenly flower garden. The servant of the servant of Shri Gauranga and Nityananda, Krishna Dasa narrates the Lord's pastimes."
 ]
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports=[
   "At dusk , He returns to His own home in the most astonishing manner and endeavors carefully to worship the deity which pleases His mother very much",
   "Gauranga is Bathed and Then Worships the Deity",
@@ -207,7 +240,7 @@ module.exports=[
   "The servant of the servant of Shri Gauranga and Nityananda Krishna Dasa narrates the Lord's pastimes. Thus Ends the Sayan-Lila"
 ]
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports=[
   "My most worshipable golden Lord Gauranga is joyfully surrounded by His most loving devotees in Shrivasa Pandita's courtyard at night. There He immerses Himself in the transcendental ocean of congregationally chanting His own holy names (internally absorbed in the divine rasa-dance of Shri Shri Radha and Krishna). He also dances wildly in a state of tearful shivering and over-whelming jubilation. After singing and dancing to His heart's content, He goes to a quiet flower-garden and enjoys a feast of forest fruits, served to Him as He reclines upon a jeweled bedstead. Thus, the Son of Shachi Devi is most deserving of my whole-hearted selfless worship.",
   "My dear mind! Just worship Lord Gauranga Mahaprabhu who, at the end of the night, suddenly awakens upon hearing the sweet warbling of the birds within the delightfully flowering forest grove of Shrivasa Pandit! At this time, His whole body is intensely thrilled due to His being aware of Lord Krishna being situated very close to Shrimati Radhrarani on Their flower-bed in a bower-house in Vrindavan. Because of this Lord Gauranga's ecstatic love is expressed instantly by wonderfully transcendental symptoms such a fountains of tears gushing from His eyes, which bathe His entire body. Just worship this Lord Gauranga, Whose bodily complexion can only be compared to shimmering pure molten gold.",
@@ -219,7 +252,7 @@ module.exports=[
   "In the evening, Shrimati Radharani travels to the pre-assigned pleasure-grove in the company of Her gopi-friends and waits impatiently for Krishna to arrive for Their secret rendezvous. When She receives news from a messenger about the activities and whereabouts of Her Beloved Lord Krishna, Her heart is completely overwhelmed with the most instense anxiety. Oh my! In exactly that same mood, Lord Gauranga travels to the courtyard of Shrivasa Pandita in the evening, walking hand on hip as Radha does. Afterwards, when He realizes that Shri Krishna has indeed arrived before Shri Radha, Lord Gauranga jubilantly dances and stumbles repeatedly, His body erupting in intense euphoria with torrents of tears and shivering limbs. Just worship the fair-complexioned Lord Gauranga!"
 ]
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports=[
   "Nisha",
   "Nishanta",
@@ -231,7 +264,7 @@ module.exports=[
   "Pradosha"
 ]
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports=[
   "At night, Lord Gauranga returns home to take rest. May this Lord Gauranga protect us all.",
   "At the end of the night (before sunrise), Lord Gauranga gets up from His bed, washes His face and converses with His wife.",
@@ -243,7 +276,7 @@ module.exports=[
   "In the evening , Lord Gauranga goes with His associates to the courtyard of Shrivasa Pandita to chant the holy names and dance in ecstasy."
 ]
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports=[
   [[22, 48], [3, 36]],
   [[3, 36], [6, 0]],
@@ -255,7 +288,7 @@ module.exports=[
   [[20, 24], [22, 48]]
 ]
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports=[
   "Continuing well into the night, Lord Gauranga dances and dances with Prabhu Nityananda in the courtyard of Shrivasa, surrounded by His most intimate devotees. His ecstatic singing is accompanied by the devotees who are expert in playing very loud rhytms on the mridanga drums. He wanders and dances with Shri Gadadhara Prabhu in the most astonishing way troughout the night, until just before dawn. Then He returns to His own home, where He retires to His bedchamber and falls asleep. I thus meditate on the daily pastimes of Shri Gauranga-nataraja.",
   "At the end of the night, upon hearing the pleasant sounds made by many birds such as cuckoos, roosters, and others, Lord Shri Gauranga arises from His bed. With His wife, Shri Vishnu-priya, He discusses many topics concerning the transcendental mellows of Their mutual loving affairs and thus They become very pleased. Then He gets up and goes to another room, wherein He sits upon a raised sitting place and is assisted by His devotees in washing His lotus face with nicely scented water. Thereafter, He very happily visits His mother, Shri Shachi Devi, as well as other friends and relatives in the home. I meditate thus on the daily pastimes of Shri Gauranga-sundara.",
@@ -267,7 +300,7 @@ module.exports=[
   "In the evening time, Lord Gauranga goes to the home of Shrivasa Pandita, accompanied by Shrila Advaitachandra and other dear associates. Meeting with the multitude of His devotees, He tastes and relishes the nectar of topics about Lord Hari, and His mind becomes most agitated with the ecstasies of pure love of Godhead. Then, becoming very lustful to relish the congregational chanting of the holy names of the Lord, Lord Gauranga orchestrates the performance of intensely jubilant sankirtana, which attains the summit of passionate glorification ,of these holy names. I thus meditate on the daily pastimes of Lord Gauranga-sundara."
 ]
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var timeIntervals = require('../data/time-intervals');
@@ -298,7 +331,7 @@ exports.getLilaIndex = function(d) {
   return index;
 };
 
-},{"../data/time-intervals":14}],17:[function(require,module,exports){
+},{"../data/time-intervals":15}],18:[function(require,module,exports){
 'use strict';
 
 var formatTime = function (h, m) {
@@ -321,7 +354,7 @@ exports.formatTimeInterval = function (interval) {
 
 exports.formatTime = formatTime;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var timeIntervals = require('./data/time-intervals');
@@ -379,4 +412,4 @@ module.exports = {
 
 }
 
-},{"./data/english-names":2,"./data/long/aparahna":3,"./data/long/madhyahna":4,"./data/long/nisha":5,"./data/long/nishanta":6,"./data/long/pradosha":7,"./data/long/prataha":8,"./data/long/purvahna":9,"./data/long/shayana":10,"./data/rupa-descriptions":11,"./data/sanskrit-names":12,"./data/short-descriptions":13,"./data/time-intervals":14,"./data/vishvanath-descriptions":15,"./lib/index":16,"./lib/time.js":17}]},{},[1]);
+},{"./data/english-names":3,"./data/long/aparahna":4,"./data/long/madhyahna":5,"./data/long/nisha":6,"./data/long/nishanta":7,"./data/long/pradosha":8,"./data/long/prataha":9,"./data/long/purvahna":10,"./data/long/shayana":11,"./data/rupa-descriptions":12,"./data/sanskrit-names":13,"./data/short-descriptions":14,"./data/time-intervals":15,"./data/vishvanath-descriptions":16,"./lib/index":17,"./lib/time.js":18}]},{},[1]);
