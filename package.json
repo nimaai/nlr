@@ -1,27 +1,31 @@
 {
   "name": "nlr-web",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "nitya lila reminder (nlr) ======================",
-
   "main": "js/app.js",
-
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "browserify js/app.js -o dist/bundle.js",
+    "watch": "watchify js/app.js -o dist/bundle.js"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/nimaai/nlr-web.git"
   },
-
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nimaai/nlr-web/issues"
   },
   "homepage": "https://github.com/nimaai/nlr-web",
-
   "dependencies": {
+    "bootstrap": "3.3.x",
+    "bootstrap-autohidingnavbar": "git+https://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar.git#1.0.0",
+    "jquery": "2.1.x",
     "nlr-js": "nimaai/nlr-js-core"
+  },
+  "devDependencies": {
+    "browserify": "10.1.x",
+    "watchify": "3.2.x"
   }
 }
