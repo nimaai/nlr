@@ -4,10 +4,6 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-body {
-    margin-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
-
 .header-image {
     display: block;
     width: 100%;
@@ -17,6 +13,10 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+}
+
+.navbar {
+  margin-bottom: 0px; /* overrides default bootstrap */
 }
 
 .headline {
