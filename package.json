@@ -20,7 +20,7 @@
   "homepage": "https://github.com/nimaai/nlr-web",
   "dependencies": {
     "bootstrap": "3.3.x",
-    "bootstrap-autohidingnavbar": "git+https://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar.git#1.0.0",
+    "scrollup": "markgoodyear/scrollup#master",
     "jquery": "2.1.x",
     "nlr-js": "nimaai/nlr-js-core"
   },
