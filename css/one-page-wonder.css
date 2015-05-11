@@ -208,3 +208,21 @@ footer {
 #scrollUp:hover{
   bottom:0px
 }
+
+#fb-link {
+  font-size: 2em;
+  padding-top: 11px;
+  padding-bottom: 0px;
+}
+
+/*************************************/
+/* don't wrap the menu when resizing */
+/*************************************/
+
+.navbar-left {
+  float: left!important;
+}
+
+.navbar-right {
+  float: right!important;
+}
