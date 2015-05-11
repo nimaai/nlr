@@ -7,16 +7,10 @@ window.jQuery = jQuery;
 
 // this variable is not used -> always global
 require('bootstrap');
-require('bootstrap-autohidingnavbar/dist/jquery.bootstrap-autohidingnavbar');
+require('scrollup/dist/jquery.scrollUp.min.js');
 
 window.addEventListener('load', function() {
-  $('.navbar-fixed-top').autoHidingNavbar();
+  $.scrollUp();
   update();
   setInterval(update, 1000);
-});
-
-window.addEventListener('hashchange', function(e) {
-  if (!window.location.hash == '') {
-    $('.navbar-fixed-top').autoHidingNavbar('hide');
-  }
 });

@@ -43,222 +43,7 @@ exports.update = function() {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"nlr":33}],2:[function(require,module,exports){
-/*
- *  Bootstrap Auto-Hiding Navbar - v1.0.0
- *  An extension for Bootstrap's fixed navbar which hides the navbar while the page is scrolling downwards and shows it the other way. The plugin is able to show/hide the navbar programmatically as well.
- *  http://www.virtuosoft.eu/code/bootstrap-autohidingnavbar/
- *
- *  Made by István Ujj-Mészáros
- *  Under Apache License v2.0 License
- */
-;(function($, window, document, undefined) {
-  var pluginName = 'autoHidingNavbar',
-      $window = $(window),
-      $document = $(document),
-      _scrollThrottleTimer = null,
-      _resizeThrottleTimer = null,
-      _throttleDelay = 70,
-      _lastScrollHandlerRun = 0,
-      _previousScrollTop = null,
-      _windowHeight = $window.height(),
-      _visible = true,
-      _hideOffset,
-      defaults = {
-        disableAutohide: false,
-        showOnUpscroll: true,
-        showOnBottom: true,
-        hideOffset: 'auto', // "auto" means the navbar height
-        animationDuration: 200
-      };
-
-  function AutoHidingNavbar(element, options) {
-    this.element = $(element);
-    this.settings = $.extend({}, defaults, options);
-    this._defaults = defaults;
-    this._name = pluginName;
-    this.init();
-  }
-
-  function hide(autoHidingNavbar) {
-    if (!_visible) {
-      return;
-    }
-
-    autoHidingNavbar.element.addClass('navbar-hidden').animate({
-      top: -autoHidingNavbar.element.height()
-    }, {
-      queue: false,
-      duration: autoHidingNavbar.settings.animationDuration
-    });
-
-    $('.dropdown.open .dropdown-toggle', autoHidingNavbar.element).dropdown('toggle');
-
-    _visible = false;
-  }
-
-  function show(autoHidingNavbar) {
-    if (_visible) {
-      return;
-    }
-
-    autoHidingNavbar.element.removeClass('navbar-hidden').animate({
-      top: 0
-    }, {
-      queue: false,
-      duration: autoHidingNavbar.settings.animationDuration
-    });
-    _visible = true;
-  }
-
-  function detectState(autoHidingNavbar) {
-    var scrollTop = $window.scrollTop(),
-        scrollDelta = scrollTop - _previousScrollTop;
-
-    _previousScrollTop = scrollTop;
-
-    if (scrollDelta < 0) {
-      if (_visible) {
-        return;
-      }
-
-      if (autoHidingNavbar.settings.showOnUpscroll || scrollTop <= _hideOffset) {
-        show(autoHidingNavbar);
-      }
-    }
-    else if (scrollDelta > 0) {
-      if (!_visible) {
-        if (autoHidingNavbar.settings.showOnBottom && scrollTop + _windowHeight === $document.height()) {
-          show(autoHidingNavbar);
-        }
-        return;
-      }
-
-      if (scrollTop >= _hideOffset) {
-        hide(autoHidingNavbar);
-      }
-    }
-
-  }
-
-  function scrollHandler(autoHidingNavbar) {
-    if (autoHidingNavbar.settings.disableAutohide) {
-      return;
-    }
-
-    _lastScrollHandlerRun = new Date().getTime();
-
-    detectState(autoHidingNavbar);
-  }
-
-  function bindEvents(autoHidingNavbar) {
-    $document.on('scroll.' + pluginName, function() {
-      if (new Date().getTime() - _lastScrollHandlerRun > _throttleDelay) {
-        scrollHandler(autoHidingNavbar);
-      }
-      else {
-        clearTimeout(_scrollThrottleTimer);
-        _scrollThrottleTimer = setTimeout(function() {
-          scrollHandler(autoHidingNavbar);
-        }, _throttleDelay);
-      }
-    });
-
-    $window.on('resize.' + pluginName, function() {
-      clearTimeout(_resizeThrottleTimer);
-      _resizeThrottleTimer = setTimeout(function() {
-        _windowHeight = $window.height();
-      }, _throttleDelay);
-    });
-  }
-
-  function unbindEvents() {
-    $document.off('.' + pluginName);
-
-    $window.off('.' + pluginName);
-  }
-
-  AutoHidingNavbar.prototype = {
-    init: function() {
-      this.elements = {
-        navbar: this.element
-      };
-
-      this.setDisableAutohide(this.settings.disableAutohide);
-      this.setShowOnUpscroll(this.settings.showOnUpscroll);
-      this.setShowOnBottom(this.settings.showOnBottom);
-      this.setHideOffset(this.settings.hideOffset);
-      this.setAnimationDuration(this.settings.animationDuration);
-
-      _hideOffset = this.settings.hideOffset === 'auto' ? this.element.height() : this.settings.hideOffset;
-      bindEvents(this);
-
-      return this.element;
-    },
-    setDisableAutohide: function(value) {
-      this.settings.disableAutohide = value;
-      return this.element;
-    },
-    setShowOnUpscroll: function(value) {
-      this.settings.showOnUpscroll = value;
-      return this.element;
-    },
-    setShowOnBottom: function(value) {
-      this.settings.showOnBottom = value;
-      return this.element;
-    },
-    setHideOffset: function(value) {
-      this.settings.hideOffset = value;
-      return this.element;
-    },
-    setAnimationDuration: function(value) {
-      this.settings.animationDuration = value;
-      return this.element;
-    },
-    show: function() {
-      show(this);
-      return this.element;
-    },
-    hide: function() {
-      hide(this);
-      return this.element;
-    },
-    destroy: function() {
-      unbindEvents(this);
-      show(this);
-      $.data(this, 'plugin_' + pluginName, null);
-      return this.element;
-    }
-  };
-
-  $.fn[pluginName] = function(options) {
-    var args = arguments;
-
-    if (options === undefined || typeof options === 'object') {
-      return this.each(function() {
-        if (!$.data(this, 'plugin_' + pluginName)) {
-          $.data(this, 'plugin_' + pluginName, new AutoHidingNavbar(this, options));
-        }
-      });
-    } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-      var returns;
-
-      this.each(function() {
-        var instance = $.data(this, 'plugin_' + pluginName);
-
-        if (instance instanceof AutoHidingNavbar && typeof instance[options] === 'function') {
-          returns = instance[options].apply(instance, Array.prototype.slice.call(args, 1));
-        }
-      });
-
-      return returns !== undefined ? returns : this;
-    }
-
-  };
-
-})(jQuery, window, document);
-
-},{}],3:[function(require,module,exports){
+},{"nlr":32}],2:[function(require,module,exports){
 // This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
 require('../../js/transition.js')
 require('../../js/alert.js')
@@ -272,7 +57,7 @@ require('../../js/popover.js')
 require('../../js/scrollspy.js')
 require('../../js/tab.js')
 require('../../js/affix.js')
-},{"../../js/affix.js":4,"../../js/alert.js":5,"../../js/button.js":6,"../../js/carousel.js":7,"../../js/collapse.js":8,"../../js/dropdown.js":9,"../../js/modal.js":10,"../../js/popover.js":11,"../../js/scrollspy.js":12,"../../js/tab.js":13,"../../js/tooltip.js":14,"../../js/transition.js":15}],4:[function(require,module,exports){
+},{"../../js/affix.js":3,"../../js/alert.js":4,"../../js/button.js":5,"../../js/carousel.js":6,"../../js/collapse.js":7,"../../js/dropdown.js":8,"../../js/modal.js":9,"../../js/popover.js":10,"../../js/scrollspy.js":11,"../../js/tab.js":12,"../../js/tooltip.js":13,"../../js/transition.js":14}],3:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: affix.js v3.3.4
  * http://getbootstrap.com/javascript/#affix
@@ -436,7 +221,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: alert.js v3.3.4
  * http://getbootstrap.com/javascript/#alerts
@@ -532,7 +317,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: button.js v3.3.4
  * http://getbootstrap.com/javascript/#buttons
@@ -650,7 +435,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.4
  * http://getbootstrap.com/javascript/#carousel
@@ -889,7 +674,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.4
  * http://getbootstrap.com/javascript/#collapse
@@ -1102,7 +887,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.4
  * http://getbootstrap.com/javascript/#dropdowns
@@ -1265,7 +1050,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: modal.js v3.3.4
  * http://getbootstrap.com/javascript/#modals
@@ -1606,7 +1391,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: popover.js v3.3.4
  * http://getbootstrap.com/javascript/#popovers
@@ -1716,7 +1501,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.4
  * http://getbootstrap.com/javascript/#scrollspy
@@ -1890,7 +1675,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: tab.js v3.3.4
  * http://getbootstrap.com/javascript/#tabs
@@ -2045,7 +1830,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.4
  * http://getbootstrap.com/javascript/#tooltip
@@ -2523,7 +2308,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: transition.js v3.3.4
  * http://getbootstrap.com/javascript/#transitions
@@ -2584,7 +2369,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -11796,7 +11581,7 @@ return jQuery;
 
 }));
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports=[
   "Night Pastimes",
   "Pastimes at the End of the Night till Sunrise",
@@ -11808,7 +11593,7 @@ module.exports=[
   "Evening Pastimes"
 ]
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports=[
   "In the afternoon Lord Gauranga meets with His beloved friends and dresses in garments that enchant all the worlds . Wandering throughout the town of Nadiya to each and every house He displays wondrous glory that has no end",
   "The Lord Tours the Town Navadvip",
@@ -11836,7 +11621,7 @@ module.exports=[
   "Thus Ends the Aparahna-Lila"
 ]
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 module.exports=[
   "In the midday period He goes to an extremely enchanting flower garden and becomes absorbed in riding the sportive waves of limitless pastime after pastime along with His intimate associates.",
   "Description of the Flower Garden",
@@ -11852,7 +11637,7 @@ module.exports=[
   "Thus Ends the Madhyahna-Lila"
 ]
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports=[
   "At night Lord Gauranga happily performs sankirtana along with His closest associates. Later He goes to the home of His beloved wife. Thus narrates Krishna Dasa.",
   "Lord Gauranga Begins the Sankirtan",
@@ -11887,7 +11672,7 @@ module.exports=[
   "Thus Ends the Nisha-Lila."
 ]
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 module.exports=[
   "At the end of the night Lord Gauranga lies upon a nice bed under the spell of sleep. There is no person alive who could behold such splendor and retain his life-breath.",
   "At the end of the night Gauranga-chanda is in His sleeping chamber. His limbs twinkle as cupid churns His mind. The golden bedstead is inlaid with solid coral and is decorated with pillows covered with pure white cloth. The nicely-colored silk is secured by cords in four corners and the jeweled tassels emit pinkish rays in all directions. Tall,strong golden posts grace the four corners supporting the expansive canopy hanging overhead.",
@@ -11918,7 +11703,7 @@ module.exports=[
   "Thus Ends the Nishanta-Lila."
 ]
 
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports=[
   "In the evening Lord Gauranga goes to Shrivasa's house while His heart blossoms in great delight . There He performs amazing pastimes according to the wishes of His dear friends.",
   "The Evening Arati of Shri Gauranga",
@@ -11934,7 +11719,7 @@ module.exports=[
   "Thus Ends the Pradosha-Lila"
 ]
 
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 module.exports=[
   "Waking up in the morning Lord Gauranga sits in the courtyard surrounded by His intimate associates. Effortlessly enchanting the minds of all beings in the universe He penetrates into their hearts and remains there always. After brushing His teeth and so forth He bathes in the celestial river Ganga overcome with ecstatic bliss . Then back at His home, He takes breakfast with His associates sporting novel prankish fun and afterwards rests.",
   "The Cooking Begins",
@@ -11955,7 +11740,7 @@ module.exports=[
   "Thus Ends the Pratah-Lila."
 ]
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports=[
   "In the forenoon period He visits the homes of devotees like Shuklambara and others and become totally overwhelmed immersed in ecstatic love as He sports various pastimes.",
   "Waking Up From the Nap",
@@ -11969,7 +11754,7 @@ module.exports=[
   "'Lord Gauranga perpetually goes to everyone's house and reveals to them the visions of Chatur-bhuja (four-armed form), Sad-bhuja (six-armed form) and so forth. At one moment He goes to Gangadasa Murari's home and at the next moment He goes to Acharya-Ratna's home. Then, Prabhu takes His devotees and sits in a heavenly flower garden. The servant of the servant of Shri Gauranga and Nityananda, Krishna Dasa narrates the Lord's pastimes."
 ]
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 module.exports=[
   "At dusk , He returns to His own home in the most astonishing manner and endeavors carefully to worship the deity which pleases His mother very much",
   "Gauranga is Bathed and Then Worships the Deity",
@@ -11981,7 +11766,7 @@ module.exports=[
   "The servant of the servant of Shri Gauranga and Nityananda Krishna Dasa narrates the Lord's pastimes. Thus Ends the Sayan-Lila"
 ]
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports=[
   "My most worshipable golden Lord Gauranga is joyfully surrounded by His most loving devotees in Shrivasa Pandita's courtyard at night. There He immerses Himself in the transcendental ocean of congregationally chanting His own holy names (internally absorbed in the divine rasa-dance of Shri Shri Radha and Krishna). He also dances wildly in a state of tearful shivering and over-whelming jubilation. After singing and dancing to His heart's content, He goes to a quiet flower-garden and enjoys a feast of forest fruits, served to Him as He reclines upon a jeweled bedstead. Thus, the Son of Shachi Devi is most deserving of my whole-hearted selfless worship.",
   "My dear mind! Just worship Lord Gauranga Mahaprabhu who, at the end of the night, suddenly awakens upon hearing the sweet warbling of the birds within the delightfully flowering forest grove of Shrivasa Pandit! At this time, His whole body is intensely thrilled due to His being aware of Lord Krishna being situated very close to Shrimati Radhrarani on Their flower-bed in a bower-house in Vrindavan. Because of this Lord Gauranga's ecstatic love is expressed instantly by wonderfully transcendental symptoms such a fountains of tears gushing from His eyes, which bathe His entire body. Just worship this Lord Gauranga, Whose bodily complexion can only be compared to shimmering pure molten gold.",
@@ -11993,7 +11778,7 @@ module.exports=[
   "In the evening, Shrimati Radharani travels to the pre-assigned pleasure-grove in the company of Her gopi-friends and waits impatiently for Krishna to arrive for Their secret rendezvous. When She receives news from a messenger about the activities and whereabouts of Her Beloved Lord Krishna, Her heart is completely overwhelmed with the most instense anxiety. Oh my! In exactly that same mood, Lord Gauranga travels to the courtyard of Shrivasa Pandita in the evening, walking hand on hip as Radha does. Afterwards, when He realizes that Shri Krishna has indeed arrived before Shri Radha, Lord Gauranga jubilantly dances and stumbles repeatedly, His body erupting in intense euphoria with torrents of tears and shivering limbs. Just worship the fair-complexioned Lord Gauranga!"
 ]
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 module.exports=[
   "Nisha",
   "Nishanta",
@@ -12005,7 +11790,7 @@ module.exports=[
   "Pradosha"
 ]
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports=[
   "At night, Lord Gauranga returns home to take rest. May this Lord Gauranga protect us all.",
   "At the end of the night (before sunrise), Lord Gauranga gets up from His bed, washes His face and converses with His wife.",
@@ -12017,7 +11802,7 @@ module.exports=[
   "In the evening , Lord Gauranga goes with His associates to the courtyard of Shrivasa Pandita to chant the holy names and dance in ecstasy."
 ]
 
-},{}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports=[
   [[22, 48], [3, 36]],
   [[3, 36], [6, 0]],
@@ -12029,7 +11814,7 @@ module.exports=[
   [[20, 24], [22, 48]]
 ]
 
-},{}],30:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports=[
   "Continuing well into the night, Lord Gauranga dances and dances with Prabhu Nityananda in the courtyard of Shrivasa, surrounded by His most intimate devotees. His ecstatic singing is accompanied by the devotees who are expert in playing very loud rhytms on the mridanga drums. He wanders and dances with Shri Gadadhara Prabhu in the most astonishing way troughout the night, until just before dawn. Then He returns to His own home, where He retires to His bedchamber and falls asleep. I thus meditate on the daily pastimes of Shri Gauranga-nataraja.",
   "At the end of the night, upon hearing the pleasant sounds made by many birds such as cuckoos, roosters, and others, Lord Shri Gauranga arises from His bed. With His wife, Shri Vishnu-priya, He discusses many topics concerning the transcendental mellows of Their mutual loving affairs and thus They become very pleased. Then He gets up and goes to another room, wherein He sits upon a raised sitting place and is assisted by His devotees in washing His lotus face with nicely scented water. Thereafter, He very happily visits His mother, Shri Shachi Devi, as well as other friends and relatives in the home. I meditate thus on the daily pastimes of Shri Gauranga-sundara.",
@@ -12041,7 +11826,7 @@ module.exports=[
   "In the evening time, Lord Gauranga goes to the home of Shrivasa Pandita, accompanied by Shrila Advaitachandra and other dear associates. Meeting with the multitude of His devotees, He tastes and relishes the nectar of topics about Lord Hari, and His mind becomes most agitated with the ecstasies of pure love of Godhead. Then, becoming very lustful to relish the congregational chanting of the holy names of the Lord, Lord Gauranga orchestrates the performance of intensely jubilant sankirtana, which attains the summit of passionate glorification ,of these holy names. I thus meditate on the daily pastimes of Lord Gauranga-sundara."
 ]
 
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 var timeIntervals = require('../data/time-intervals');
@@ -12072,7 +11857,7 @@ exports.getLilaIndex = function(d) {
   return index;
 };
 
-},{"../data/time-intervals":29}],32:[function(require,module,exports){
+},{"../data/time-intervals":28}],31:[function(require,module,exports){
 'use strict';
 
 var formatTime = function (h, m) {
@@ -12095,7 +11880,7 @@ exports.formatTimeInterval = function (interval) {
 
 exports.formatTime = formatTime;
 
-},{}],33:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 var timeIntervals = require('./data/time-intervals');
@@ -12153,7 +11938,15 @@ module.exports = {
 
 }
 
-},{"./data/english-names":17,"./data/long/aparahna":18,"./data/long/madhyahna":19,"./data/long/nisha":20,"./data/long/nishanta":21,"./data/long/pradosha":22,"./data/long/prataha":23,"./data/long/purvahna":24,"./data/long/shayana":25,"./data/rupa-descriptions":26,"./data/sanskrit-names":27,"./data/short-descriptions":28,"./data/time-intervals":29,"./data/vishvanath-descriptions":30,"./lib/index":31,"./lib/time.js":32}],34:[function(require,module,exports){
+},{"./data/english-names":16,"./data/long/aparahna":17,"./data/long/madhyahna":18,"./data/long/nisha":19,"./data/long/nishanta":20,"./data/long/pradosha":21,"./data/long/prataha":22,"./data/long/purvahna":23,"./data/long/shayana":24,"./data/rupa-descriptions":25,"./data/sanskrit-names":26,"./data/short-descriptions":27,"./data/time-intervals":28,"./data/vishvanath-descriptions":29,"./lib/index":30,"./lib/time.js":31}],33:[function(require,module,exports){
+/*!
+ * scrollup v2.4.1
+ * Url: http://markgoodyear.com/labs/scrollup/
+ * Copyright (c) Mark Goodyear — @markgdyr — http://markgoodyear.com
+ * License: MIT
+ */
+!function(l,o,e){"use strict";l.fn.scrollUp=function(o){l.data(e.body,"scrollUp")||(l.data(e.body,"scrollUp",!0),l.fn.scrollUp.init(o))},l.fn.scrollUp.init=function(r){var s,t,c,i,n,a,d,p=l.fn.scrollUp.settings=l.extend({},l.fn.scrollUp.defaults,r),f=!1;switch(d=p.scrollTrigger?l(p.scrollTrigger):l("<a/>",{id:p.scrollName,href:"#top"}),p.scrollTitle&&d.attr("title",p.scrollTitle),d.appendTo("body"),p.scrollImg||p.scrollTrigger||d.html(p.scrollText),d.css({display:"none",position:"fixed",zIndex:p.zIndex}),p.activeOverlay&&l("<div/>",{id:p.scrollName+"-active"}).css({position:"absolute",top:p.scrollDistance+"px",width:"100%",borderTop:"1px dotted"+p.activeOverlay,zIndex:p.zIndex}).appendTo("body"),p.animation){case"fade":s="fadeIn",t="fadeOut",c=p.animationSpeed;break;case"slide":s="slideDown",t="slideUp",c=p.animationSpeed;break;default:s="show",t="hide",c=0}i="top"===p.scrollFrom?p.scrollDistance:l(e).height()-l(o).height()-p.scrollDistance,n=l(o).scroll(function(){l(o).scrollTop()>i?f||(d[s](c),f=!0):f&&(d[t](c),f=!1)}),p.scrollTarget?"number"==typeof p.scrollTarget?a=p.scrollTarget:"string"==typeof p.scrollTarget&&(a=Math.floor(l(p.scrollTarget).offset().top)):a=0,d.click(function(o){o.preventDefault(),l("html, body").animate({scrollTop:a},p.scrollSpeed,p.easingType)})},l.fn.scrollUp.defaults={scrollName:"scrollUp",scrollDistance:300,scrollFrom:"top",scrollSpeed:300,easingType:"linear",animation:"fade",animationSpeed:200,scrollTrigger:!1,scrollTarget:!1,scrollText:"Scroll to top",scrollTitle:!1,scrollImg:!1,activeOverlay:!1,zIndex:2147483647},l.fn.scrollUp.destroy=function(r){l.removeData(e.body,"scrollUp"),l("#"+l.fn.scrollUp.settings.scrollName).remove(),l("#"+l.fn.scrollUp.settings.scrollName+"-active").remove(),l.fn.jquery.split(".")[1]>=7?l(o).off("scroll",r):l(o).unbind("scroll",r)},l.scrollUp=l.fn.scrollUp}(jQuery,window,document);
+},{}],34:[function(require,module,exports){
 'use strict';
 
 var update = require('./update').update;
@@ -12163,18 +11956,12 @@ window.jQuery = jQuery;
 
 // this variable is not used -> always global
 require('bootstrap');
-require('bootstrap-autohidingnavbar/dist/jquery.bootstrap-autohidingnavbar');
+require('scrollup/dist/jquery.scrollUp.min.js');
 
 window.addEventListener('load', function() {
-  $('.navbar-fixed-top').autoHidingNavbar();
+  $.scrollUp();
   update();
   setInterval(update, 1000);
 });
 
-window.addEventListener('hashchange', function(e) {
-  if (!window.location.hash == '') {
-    $('.navbar-fixed-top').autoHidingNavbar('hide');
-  }
-});
-
-},{"./update":1,"bootstrap":3,"bootstrap-autohidingnavbar/dist/jquery.bootstrap-autohidingnavbar":2,"jquery":16}]},{},[34]);
+},{"./update":1,"bootstrap":2,"jquery":15,"scrollup/dist/jquery.scrollUp.min.js":33}]},{},[34]);
