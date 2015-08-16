@@ -26,6 +26,13 @@ var updateLilaInformation = function(index) {
     nlr.getLongDescription(index).join('<br><br>');
 };
 
+var updateLilaProgress = function(d) {
+  var procent = nlr.getLilaProgress(d);
+  var lilaProgress = global.document.getElementById('lila-progress');
+  lilaProgress.setAttribute('aria-valuenow', procent);
+  lilaProgress.setAttribute('style', 'width: ' + procent + '%;');
+};
+
 exports.update = function() {
   var currentDate = new Date()
     , currentHour = currentDate.getHours()
@@ -37,5 +44,6 @@ exports.update = function() {
   if (i != index) {
     index = i;
     updateLilaInformation(i);
+    updateLilaProgress(currentDate);
   }
 };
