@@ -234,3 +234,7 @@ footer {
 .navbar-right {
   float: right!important;
 }
+
+.navbar-nav > li {
+  float: left!important;
+}
