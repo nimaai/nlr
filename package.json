@@ -2,7 +2,7 @@
   "name": "nlr-web",
   "version": "1.2.0",
   "description": "nitya lila reminder (nlr) ======================",
-  "main": "js/app.coffee",
+  "main": "coffee/app.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "browserify -t coffeeify coffee/app.coffee -o dist/bundle.js",
