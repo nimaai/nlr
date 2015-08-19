@@ -22,7 +22,7 @@
     "bootstrap": "3.3.x",
     "scrollup": "markgoodyear/scrollup#master",
     "jquery": "2.1.x",
-    "nlr-js": "nimaai/nlr-core#1.1.1"
+    "nlr-core": "nimaai/nlr-core#1.1.2"
   },
   "devDependencies": {
     "browserify": "10.1.x",

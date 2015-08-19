@@ -16,13 +16,13 @@ longDescriptions[6] = require('./data/long/shayana')
 longDescriptions[7] = require('./data/long/pradosha')
 
 module.exports =
-  getLilaIndex: require('./lib/index').getLilaIndex,
-  getLilaProgress: require('./lib/progress').getLilaProgress,
-  getTimeInterval: (i) -> timeIntervals[i],
-  getSanskritName: ( (i) -> sanskritNames[i] ),
-  getEnglishName: ( (i) -> englishNames[i] ),
-  getShortDescription: ( (i) -> shortDescriptions[i] ),
-  getRupaDescription: ( (i) -> rupaDescriptions[i] ),
-  getVishvanathDescription: ( (i) -> vishvanathDescriptions[i] ),
-  getLongDescription: ( (i) -> longDescriptions[i] ),
+  getLilaIndex: require('./lib/index').getLilaIndex
+  getLilaProgress: require('./lib/progress').getLilaProgress
+  getTimeInterval: (i) -> timeIntervals[i]
+  getSanskritName: (i) -> sanskritNames[i]
+  getEnglishName: (i) -> englishNames[i]
+  getShortDescription: (i) -> shortDescriptions[i]
+  getRupaDescription: (i) -> rupaDescriptions[i]
+  getVishvanathDescription: (i) -> vishvanathDescriptions[i]
+  getLongDescription: (i) -> longDescriptions[i]
   time: require('./lib/time')
