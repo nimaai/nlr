@@ -2,11 +2,11 @@
   "name": "nlr-web",
   "version": "1.2.0",
   "description": "nitya lila reminder (nlr) ======================",
-  "main": "js/app.js",
+  "main": "js/app.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "browserify -t coffeeify js/app.js -o dist/bundle.js",
-    "watch": "watchify js/app.js -o dist/bundle.js"
+    "bundle": "browserify -t coffeeify coffee/app.coffee -o dist/bundle.js",
+    "watch": "watchify coffee/app.coffee -o dist/bundle.js"
   },
   "repository": {
     "type": "git",
