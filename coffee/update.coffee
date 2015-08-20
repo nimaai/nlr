@@ -1,4 +1,4 @@
-nlr = require('../node_modules/nlr/main.coffee')
+nlr = require('nlr-core/main.coffee')
 index = null
 
 updateCurrentTime = (currentHour, currentMinute) ->
