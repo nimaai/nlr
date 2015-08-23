@@ -1,6 +1,6 @@
 {
   "name": "nlr-web",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "nitya lila reminder (nlr) ======================",
   "main": "coffee/app.coffee",
   "scripts": {
