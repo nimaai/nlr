@@ -1,5 +1,5 @@
 nlr = require('nlr-core/main.coffee')
-index = null
+global.index = null
 
 updateCurrentTime = (currentHour, currentMinute) ->
   global.document.getElementById('current-time').innerHTML =
@@ -38,5 +38,5 @@ exports.update = ->
   updateLilaProgress(currentDate)
 
   if (i != index)
-    index = i
+    global.index = i
     updateLilaInformation(i)
