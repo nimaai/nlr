@@ -235,6 +235,7 @@ footer {
 
 #nav-lila > #backward, #forward {
   background: rgba(255,255,255,0.65);
+  color: inherit;
 }
 
 /*************************************/
