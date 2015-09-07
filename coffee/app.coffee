@@ -1,4 +1,7 @@
-update = require('./update.coffee').update
+global.index = null
+
+update = require('./update.coffee')
+navigate = require('./nav.coffee')
 jQuery = require('jquery')
 window.$ = jQuery
 window.jQuery = jQuery
@@ -7,7 +10,13 @@ window.jQuery = jQuery
 require('bootstrap')
 require('scrollup/dist/jquery.scrollUp.min.js')
 
-window.addEventListener 'load', ->
+registerNav = ->
+  navigate.forward()
+  console.log index
+  update.updateLila()
+
+jQuery ->
   $.scrollUp()
-  update()
-  setInterval(update, 1000)
+  registerNav()
+  update.updateCurrentLila()
+  setInterval(update.updateCurrentLila, 1000)

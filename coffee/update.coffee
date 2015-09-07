@@ -1,5 +1,4 @@
 nlr = require('nlr-core/main.coffee')
-global.index = null
 
 updateCurrentTime = (currentHour, currentMinute) ->
   global.document.getElementById('current-time').innerHTML =
@@ -28,7 +27,10 @@ updateLilaProgress = (d) ->
   lilaProgress.setAttribute('aria-valuenow', procent)
   lilaProgress.setAttribute('style', 'width: ' + procent + '%;')
 
-exports.update = ->
+exports.updateLila = ->
+  updateLilaInformation(index)
+
+exports.updateCurrentLila = ->
   currentDate = new Date()
   currentHour = currentDate.getHours()
   currentMinute = currentDate.getMinutes()
