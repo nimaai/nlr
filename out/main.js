@@ -1,3 +1,4 @@
-goog.addDependency("base.js", ['goog'], []);
-goog.addDependency("../cljs/core.js", ['cljs.core'], ['goog.string', 'goog.object', 'goog.string.StringBuffer', 'goog.array']);
-goog.addDependency("../nlr_web/update.js", ['nlr_web.update'], ['cljs.core']);
+var CLOSURE_UNCOMPILED_DEFINES = null;
+if(typeof goog == "undefined") document.write('<script src="out/goog/base.js"></script>');
+document.write('<script src="out/cljs_deps.js"></script>');
+document.write('<script>if (typeof goog != "undefined") { goog.require("nlr_web.update"); } else { console.warn("ClojureScript could not load :main, did you forget to specify :asset-path?"); };</script>');
