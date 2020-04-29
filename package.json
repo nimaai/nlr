@@ -21,7 +21,7 @@
   "dependencies": {
     "bootstrap": "3.3.x",
     "scrollup": "markgoodyear/scrollup#master",
-    "jquery": "2.1.x",
+    "jquery": "3.5.x",
     "nlr-core": "nimaai/nlr-core#1.1.3"
   },
   "devDependencies": {
